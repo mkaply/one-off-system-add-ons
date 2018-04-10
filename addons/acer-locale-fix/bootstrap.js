@@ -4,13 +4,14 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 "use strict";
 
+/* eslint-disable-next-line */
 let {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 
 /* eslint-disable mozilla/use-chromeutils-import */
 Cu.import("resource://gre/modules/Services.jsm");
 
-const OLD_LOCALE_PREF = "general.useragent.locale"
-const NEW_LOCALE_PREF = "intl.locale.requested"
+const OLD_LOCALE_PREF = "general.useragent.locale";
+const NEW_LOCALE_PREF = "intl.locale.requested";
 
 let observer = {
   observe(subject, topic, data) {
