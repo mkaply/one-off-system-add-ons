@@ -65,6 +65,6 @@ function overrideSearchEngine() {
     url.params = url.params.filter(p => !p.purpose);
   }
   url.params.push({name: "client", value: searchCode, purpose: "searchbar"});
-  url.params.push({name: "client", value: searchCode + "ab", purpose: "keyword"});
+  url.params.push({name: "client", value: searchCode + "-ab", purpose: "keyword"});
   engine._shortName = shortName;
 }
