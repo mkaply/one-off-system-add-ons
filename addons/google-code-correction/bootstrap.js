@@ -72,5 +72,11 @@ function overrideSearchEngine() {
   }
   url.params.push({name: "client", value: searchCode, purpose: "searchbar"});
   url.params.push({name: "client", value: `${searchCode}-ab`, purpose: "keyword"});
+  // In older versions of Firefox, if a purpose was passed and a search plugin
+  // didn't support it, it was ignored. So we need to add every purpose.
+  url.params.push({name: "client", value: searchCode, purpose: "contextmenu"});
+  url.params.push({name: "client", value: searchCode, purpose: "homepage"});
+  url.params.push({name: "client", value: searchCode, purpose: "newtab"});
+  url.params.push({name: "client", value: searchCode, purpose: "system"});
   engine._shortName = shortName;
 }
