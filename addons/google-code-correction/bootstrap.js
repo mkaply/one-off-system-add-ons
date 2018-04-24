@@ -4,10 +4,16 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 "use strict";
 
-/* eslint-disable-next-line */
+/* We need to disable these because this system add-on
+ * goes back to Firefox 43 */
+
+/* eslint-disable mozilla/no-useless-parameters */
+/* eslint-disable mozilla/no-define-cc-etc */
+/* eslint-disable mozilla/use-default-preference-values */
+/* eslint-disable mozilla/use-chromeutils-import */
+
 let {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 
-/* eslint-disable mozilla/use-chromeutils-import */
 Cu.import("resource://gre/modules/Services.jsm");
 
 function startup(data, reason) {
@@ -65,6 +71,6 @@ function overrideSearchEngine() {
     url.params = url.params.filter(p => !p.purpose);
   }
   url.params.push({name: "client", value: searchCode, purpose: "searchbar"});
-  url.params.push({name: "client", value: searchCode + "-ab", purpose: "keyword"});
+  url.params.push({name: "client", value: `${searchCode}-ab`, purpose: "keyword"});
   engine._shortName = shortName;
 }
