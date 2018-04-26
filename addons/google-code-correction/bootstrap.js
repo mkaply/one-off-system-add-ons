@@ -16,23 +16,6 @@ let {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 
 Cu.import("resource://gre/modules/Services.jsm");
 
-function startup(data, reason) {
-  if (Services.search.isInitialized) {
-    overrideSearchEngine();
-  } else {
-    Services.obs.addObserver(function searchObserver(subject, topic, data) {
-      if (data == "init-complete") {
-        Services.obs.removeObserver(searchObserver, "browser-search-service");
-        overrideSearchEngine();
-      }
-    }, "browser-search-service", false);
-  }
-}
-
-function shutdown() {}
-function install() {}
-function uninstall() {}
-
 function overrideSearchEngine() {
   let engine = Services.search.getEngineByName("Google");
   if (!engine) {
@@ -80,3 +63,20 @@ function overrideSearchEngine() {
   url.params.push({name: "client", value: searchCode, purpose: "system"});
   engine._shortName = shortName;
 }
+
+function startup(data, reason) {
+  if (Services.search.isInitialized) {
+    overrideSearchEngine();
+  } else {
+    Services.obs.addObserver(function searchObserver(subject, topic, data) {
+      if (data == "init-complete") {
+        Services.obs.removeObserver(searchObserver, "browser-search-service");
+        overrideSearchEngine();
+      }
+    }, "browser-search-service", false);
+  }
+}
+
+function shutdown() {}
+function install() {}
+function uninstall() {}
