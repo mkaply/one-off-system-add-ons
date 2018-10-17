@@ -11,7 +11,7 @@ let observer = {
   ],
 
   _loadPathIgnoreList: [
-    "[other]addEngineWithDetails:searchignore@mozilla.com",
+    "[https]opensearch.webofsearch.com/bing-search.xml",
     "[https]opensearch.startpageweb.com/bing-search.xml",
     "[https]opensearch.startwebsearch.com/bing-search.xml",
     "[https]opensearch.webstartsearch.com/bing-search.xml",
@@ -30,7 +30,7 @@ let observer = {
             Services.search.removeEngine(engine);
             return;
           }
-          if (this._loadPathIgnoreList.includes(aEngine.wrappedJSObject._loadPath)) {
+          if (this._loadPathIgnoreList.includes(engine.wrappedJSObject._loadPath)) {
             Services.search.removeEngine(engine);
             return;
           }
