@@ -1,3 +1,16 @@
+/* -*- indent-tabs-mode: nil; js-indent-level: 2 -*- */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+"use strict";
+
+/* We need to disable these because this system add-on
+ * goes back to Firefox 43 */
+
+/* eslint-disable mozilla/no-useless-parameters */
+/* eslint-disable mozilla/no-define-cc-etc */
+/* eslint-disable mozilla/use-chromeutils-import */
+
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 
@@ -19,7 +32,7 @@ let observer = {
 
   observe: function observe(subject, topic, data) {
     switch (topic) {
-      case "browser-search-service":
+      case "browser-search-service": {
         if (data != "init-complete") {
           return;
         }
@@ -28,17 +41,15 @@ let observer = {
           let url = engine.getSubmission("dummy", null, "keyword").uri.spec.toLowerCase();
           if (this._submissionURLIgnoreList.some(code => url.includes(code.toLowerCase()))) {
             Services.search.removeEngine(engine);
-            return;
-          }
-          if (this._loadPathIgnoreList.includes(engine.wrappedJSObject._loadPath)) {
+          } else if (this._loadPathIgnoreList.includes(engine.wrappedJSObject._loadPath)) {
             Services.search.removeEngine(engine);
-            return;
           }
         });
         break;
+      }
     }
   }
-}
+};
 
 function install(aData, aReason) {}
 
