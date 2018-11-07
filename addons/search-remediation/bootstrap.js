@@ -20,14 +20,14 @@ let observer = {
     "form=CONBDF",
     "clid=2308146",
     "fr=mcafee",
-    "PC=MC0",
+    "PC=MC0"
   ],
 
   _loadPathIgnoreList: [
     "[https]opensearch.webofsearch.com/bing-search.xml",
     "[https]opensearch.startpageweb.com/bing-search.xml",
     "[https]opensearch.startwebsearch.com/bing-search.xml",
-    "[https]opensearch.webstartsearch.com/bing-search.xml",
+    "[https]opensearch.webstartsearch.com/bing-search.xml"
   ],
 
   observe: function observe(subject, topic, data) {
