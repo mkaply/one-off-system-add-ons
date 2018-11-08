@@ -1,8 +1,22 @@
+/* -*- indent-tabs-mode: nil; js-indent-level: 2 -*- */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+"use strict";
+
+/* We need to disable these because this system add-on
+ * goes back to Firefox 43 */
+
+/* eslint-disable mozilla/no-define-cc-etc */
+/* eslint-disable mozilla/use-chromeutils-import */
+/* eslint-disable mozilla/no-useless-parameters */
+/* eslint-disable mozilla/use-chromeutils-generateqi */
+
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
-Components.utils.importGlobalProperties(["URLSearchParams"]);
+Cu.importGlobalProperties(["URLSearchParams"]);
 
 // Regular expressions used to identify common search URLS.
 const SEARCH_URL_REGEX = new RegExp([
@@ -289,8 +303,8 @@ let observer = {
         BrowserUsageTelemetry.init();
         break;
     }
-  }
-}
+  },
+};
 
 function install(aData, aReason) {}
 
@@ -299,7 +313,7 @@ function uninstall(aData, aReason) {}
 function startup(aData, aReason) {
   // We added Google organic search in 62.0.1
   // https://bugzilla.mozilla.org/show_bug.cgi?id=1475571
-  let noGoogle = (Services.vc.compare("62.0.1", Services.appinfo.version) > 0);
+  noGoogle = (Services.vc.compare("62.0.1", Services.appinfo.version) > 0);
   Services.obs.addObserver(observer, "sessionstore-windows-restored", false);
   Services.obs.addObserver(observer, "quit-application-granted", false);
 }
